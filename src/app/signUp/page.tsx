@@ -52,12 +52,12 @@ export default function SignUpPage() {
         }
     }
 
-    // const handleGithubSignIn = async () => {
-    //   const data = await authClient.signIn.social({
-    //     provider: "github",
-    //   });
-    //   console.log(data);
-    // }     
+    const handleGithubSignIn = async () => {
+      const data = await authClient.signIn.social({
+        provider: "github",
+      });
+      console.log(data);
+    }     
 
     return (
         <div className=" mt-5 flex flex-col max-w-1/2 mx-auto gap-6">
@@ -81,14 +81,15 @@ export default function SignUpPage() {
                                     </svg>
                                     Login with Apple
                                 </Button> */}
-                                <Button variant="outline" type="button">
+                                <Button onClick={handleGithubSignIn} variant="outline" type="button">
                                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                                        <path
-                                            d="M12.48 10.92v3.28h7.84c-.24 1.84-.853 3.187-1.787 4.133-1.147 1.147-2.933 2.4-6.053 2.4-4.827 0-8.6-3.893-8.6-8.72s3.773-8.72 8.6-8.72c2.6 0 4.507 1.027 5.907 2.347l2.307-2.307C18.747 1.44 16.133 0 12.48 0 5.867 0 .307 5.387.307 12s5.56 12 12.173 12c3.573 0 6.267-1.173 8.373-3.36 2.16-2.16 2.84-5.213 2.84-7.667 0-.76-.053-1.467-.173-2.053H12.48z"
-                                            fill="currentColor"
+                                     <path
+                                            fillRule="evenodd"
+                                            clipRule="evenodd"
+                                            d="M12 0C5.37 0 0 5.37 0 12c0 5.3 3.438 9.8 8.205 11.387.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.726-4.042-1.61-4.042-1.61-.546-1.387-1.333-1.756-1.333-1.756-1.09-.745.083-.73.083-.73 1.205.084 1.84 1.237 1.84 1.237 1.07 1.834 2.807 1.304 3.492.997.108-.775.418-1.305.762-1.605-2.665-.304-5.467-1.334-5.467-5.931 0-1.31.468-2.381 1.236-3.221-.124-.303-.536-1.524.117-3.176 0 0 1.008-.322 3.3 1.23a11.5 11.5 0 0 1 6.006 0c2.29-1.552 3.296-1.23 3.296-1.23.655 1.652.243 2.873.12 3.176.77.84 1.233 1.911 1.233 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .32.216.694.825.576A12 12 0 0 0 12 0Z"
                                         />
                                     </svg>
-                                    Sign up with Google
+                                    Sign up with GitHub
                                 </Button>
                             </Field>
                             <FieldSeparator className="*:data-[slot=field-separator-content]:bg-card">

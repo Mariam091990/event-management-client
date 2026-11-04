@@ -1,11 +1,13 @@
-import React from 'react';
+
 
 const EventsPage = () => {
 
+
+   
     
     return (
         <div>
-            all events
+        all
 
         </div>
     );

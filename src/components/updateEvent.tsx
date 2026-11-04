@@ -34,6 +34,7 @@ import { Textarea } from "@/components/ui/textarea";
 }
 
 const eventTypes = [
+    "Health Camp",
     "Cleanup",
     "Plantation",
     "Donation",

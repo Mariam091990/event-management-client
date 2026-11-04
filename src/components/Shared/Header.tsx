@@ -4,13 +4,7 @@
 import { Button } from "@base-ui/react";
 import Image from "next/image";
 import Link from "next/link";
-
-// import NavLinks from "./NavLinks";
-// import UserInfo from "./UserInfo";
-// import BanglaDate from "./BanglaDate";
-
-
-
+import UserInfo from "./userInfo";
 
 
 
@@ -21,8 +15,8 @@ export default function Navbar() {
     return (
         <header className="w-full border-b border-gray-200 bg-white">
 
-            {/* ================= TOP ROW ================= */}
-            <div className="mx-auto flex h-15.5 max-w-225 justify-around items-center  px-4 mt-5 mb-5">
+      
+            <div className=" flex h-15.5 max-w-450 justify-around px-4 mt-5 mb-5">
 
                 <div className="flex items-center gap-2">
                     {/* Logo */}
@@ -65,15 +59,9 @@ export default function Navbar() {
                     </Button></Link>
                 </div>
 
-                <div>user info</div>
-                {/* <UserInfo /> */}
+               
+                <UserInfo />
             </div>
-
-
-            {/* ================= CATEGORY NAV ================= */}
-
-            {/* <NavLinks /> */}
-
 
         </header>
     );

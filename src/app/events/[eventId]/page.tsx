@@ -10,11 +10,14 @@ import {
     ArrowLeft,
     Tag,
     Pencil,
-   
+
 } from "lucide-react";
 
 import UpdateDialog from "@/components/updateEvent";
 import DeleteEventPage from "@/components/deleteEvent";
+import JoinedEventPage from "@/components/joinedEvent";
+
+import OrganizerInfo from "@/components/Shared/organizerInfo";
 
 interface IEvent {
     _id: string;
@@ -34,6 +37,9 @@ interface PageProps {
 const EventDetailsContent = async ({
     params,
 }: PageProps) => {
+    // const { data: session } = authClient.useSession();
+
+    //     const user = session?.user;
 
     const { eventId } = await params;
     console.log(eventId);
@@ -63,7 +69,7 @@ const EventDetailsContent = async ({
         throw new Error("Unable to catch details.")
     }
 
-    
+
 
 
     return (
@@ -97,8 +103,8 @@ const EventDetailsContent = async ({
                             </div>
 
                             {/* Delete Event */}
-                            <DeleteEventPage event={event}/>
-                           
+                            <DeleteEventPage event={event} />
+
                         </div>
 
                     </div>
@@ -172,15 +178,8 @@ const EventDetailsContent = async ({
                                             <UserRound size={22} />
                                         </div>
 
-                                        <div>
-                                            <p className="text-sm font-semibold text-slate-800">
-                                                Event Organizer
-                                            </p>
-
-                                            <p className="text-sm text-slate-500">
-                                                {event.organizerEmail || "Organizer information unavailable"}
-                                            </p>
-                                        </div>
+                                        <OrganizerInfo event={event} />
+                                        
                                     </div>
 
                                 </div>
@@ -257,14 +256,8 @@ const EventDetailsContent = async ({
 
                                 {/* Join event Button */}
 
-                                <button
-                                    type="button"
-                                    className="flex w-full items-center justify-center gap-2 rounded-xl border border-slate-200 bg-green-300 px-5 py-3 font-semibold text-slate-700 transition-all hover:border-slate-300 hover:bg-slate-200"
-                                >
-                                    <UserRound size={19} />
-                                    Join Event
-                                </button>
-                                
+                                <JoinedEventPage event={event} />
+
                                 <p className="mt-4 text-center text-xs leading-5 text-slate-400">
                                     Be part of something meaningful. Join this community initiative.
                                 </p>

@@ -3,8 +3,11 @@
 
 import { useState, type ChangeEvent } from "react";
 import { useRouter } from "next/navigation";
+import { authClient } from "@/lib/auth-client";
+// import { authClient } from "@/lib/auth-client";
 
 const eventTypes = [
+    "Health Camp",
     "Cleanup",
     "Plantation",
     "Donation",
@@ -27,6 +30,9 @@ interface EventFormData {
 
 export default function CreateEventPage() {
     const router = useRouter();
+    const { data: session } = authClient.useSession();
+
+    const user = session?.user;
 
     const [formData, setFormData] = useState<EventFormData>({
         title: "",
@@ -72,22 +78,33 @@ export default function CreateEventPage() {
         e.preventDefault();
         setError("");
 
-
+        // Check whether user is logged in
+        // if (!user) {
+        //     alert("Please login first!");
+        //     return;
+        // }
 
         if (formData.eventDate <= getTomorrowDate()) {
             setError("Please select a future date.");
             return;
         }
 
+
         try {
             setLoading(true);
+
+            const eventData = {
+                ...formData,
+                organizerName: user?.name || "",
+                organizerEmail: user?.email || "",
+            };
 
             const response = await fetch("http://localhost:5000/events", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
                 },
-                body: JSON.stringify(formData),
+                body: JSON.stringify(eventData),
             });
 
             if (!response.ok) {
@@ -109,7 +126,7 @@ export default function CreateEventPage() {
         }
     };
 
-    
+
 
     return (
         <main className="min-h-screen bg-linear-to-br from-emerald-50 via-white to-teal-50 px-4 py-12">
@@ -253,7 +270,7 @@ export default function CreateEventPage() {
                                 required
                             />
                         </div>
- 
+
                         {/* Error Message */}
                         {error && (
                             <div className="rounded-lg bg-red-50 p-3 text-sm text-red-600">
@@ -277,23 +294,62 @@ export default function CreateEventPage() {
                             )}
                         </button>
 
-                        {/* Update Information */}
-                        {/* <button
-                            type="button"
-                            disabled
-                            className="btn w-full border border-sky-200 bg-sky-50 text-sky-700 hover:bg-sky-100 disabled:opacity-70"
-                        >
-                            ✏️ Update Information
-                        </button> */}
 
-                        {/* Delete Event */}
-                        {/* <button
-                            type="button"
-                            disabled
-                            className="btn w-full border border-red-200 bg-red-50 text-red-600 hover:bg-red-100 disabled:opacity-70"
-                        >
-                            🗑️ Delete Event
-                        </button> */}
+                        {/* Organizer Information */}
+                        <div className="mt-8 border-t border-emerald-100 pt-6">
+
+                            <div className="mb-4">
+                                <h2 className="text-lg font-bold text-gray-800">
+                                    Organizer Information
+                                </h2>
+
+                                <p className="mt-1 text-sm text-gray-500">
+                                    Your account information as the event organizer.
+                                </p>
+                            </div>
+
+                            <div className="grid gap-5 md:grid-cols-2">
+
+                                {/* Organizer Name */}
+                                <div>
+                                    <label className="mb-2 block font-semibold text-gray-700">
+                                        Organizer Name
+                                    </label>
+
+                                    <input
+                                        type="text"
+                                        value={user?.name || ""}
+                                        readOnly
+                                        placeholder="Your name"
+                                        className="input input-bordered w-full bg-gray-100 text-gray-600"
+                                    />
+                                </div>
+
+                                {/* Organizer Email */}
+                                <div>
+                                    <label className="mb-2 block font-semibold text-gray-700">
+                                        Organizer Email
+                                    </label>
+
+                                    <input
+                                        type="email"
+                                        value={user?.email || ""}
+                                        readOnly
+                                        placeholder="Your email"
+                                        className="input input-bordered w-full bg-gray-100 text-gray-600"
+                                    />
+                                </div>
+
+                            </div>
+
+                            {!user && (
+                                <p className="mt-3 text-sm text-red-500">
+                                    Please log in to create an event.
+                                </p>
+                            )}
+
+                        </div>
+
 
 
                     </form>

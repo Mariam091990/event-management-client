@@ -15,7 +15,7 @@ const UpcommingEventsPage = async () => {
 
     return (
 
-        <div>
+        <div id='allEvents'>
 
             <UpcomingEventsContent events={data} />
         </div>

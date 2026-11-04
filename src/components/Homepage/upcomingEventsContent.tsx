@@ -6,6 +6,7 @@ import Link from "next/link";
 import { Search, Plus, CalendarDays } from "lucide-react";
 
 import EventCard from "@/components/Homepage/eventCard";
+import { authClient } from "@/lib/auth-client";
 
 interface IEvent {
     _id: string;
@@ -38,6 +39,11 @@ const categories = [
 const UpcomingEventsContent = ({
     events,
 }: UpcomingEventsContentProps) => {
+
+    const { data: session } = authClient.useSession();
+    
+        const user = session?.user;
+
     const [activeCategory, setActiveCategory] = useState("All");
     const [searchTerm, setSearchTerm] = useState("");
 
@@ -57,7 +63,7 @@ const UpcomingEventsContent = ({
     }, [events, activeCategory, searchTerm]);
 
     return (
-        <main className="min-h-screen bg-slate-50 px-4 py-12 md:px-8">
+        <main id="" className="min-h-screen bg-slate-50 px-4 py-12 md:px-8">
 
             <div className="mx-auto max-w-7xl">
 
@@ -82,13 +88,15 @@ const UpcomingEventsContent = ({
                     </div>
 
                     {/* Create Event Button */}
-                    <Link
+           {   user?     
+                    (<Link
                         href="/create-events"
                         className="inline-flex shrink-0 items-center justify-center gap-2 rounded-xl bg-blue-600 px-6 py-3 text-sm font-semibold text-white shadow-md shadow-blue-600/20 transition-all hover:-translate-y-0.5 hover:bg-blue-700"
                     >
                         <Plus size={18} />
                         Create Event
-                    </Link>
+                    </Link>): ""
+}
 
                 </section>
 
