@@ -13,15 +13,22 @@ interface IEvent {
     title: string;
     description: string;
     eventType: string;
-    thumbnail: string;
+    thumbnail: string;      
     location: string;
     eventDate: string;
     organizerEmail?: string | null;
+    organizerName?: string | null,
     featured?: boolean;
 }
+  
+// interface IUser {
+//     name: string;
+//     email: string,
+// }
 
 interface UpcomingEventsContentProps {
     events: IEvent[];
+    // user:IUser
 }
 
 const categories = [
@@ -41,8 +48,8 @@ const UpcomingEventsContent = ({
 }: UpcomingEventsContentProps) => {
 
     const { data: session } = authClient.useSession();
-    
-        const user = session?.user;
+
+    const user = session?.user;
 
     const [activeCategory, setActiveCategory] = useState("All");
     const [searchTerm, setSearchTerm] = useState("");
@@ -88,15 +95,15 @@ const UpcomingEventsContent = ({
                     </div>
 
                     {/* Create Event Button */}
-           {   user?     
-                    (<Link
-                        href="/create-events"
-                        className="inline-flex shrink-0 items-center justify-center gap-2 rounded-xl bg-blue-600 px-6 py-3 text-sm font-semibold text-white shadow-md shadow-blue-600/20 transition-all hover:-translate-y-0.5 hover:bg-blue-700"
-                    >
-                        <Plus size={18} />
-                        Create Event
-                    </Link>): ""
-}
+                    {user ?
+                        (<Link
+                            href="/create-events"
+                            className="inline-flex shrink-0 items-center justify-center gap-2 rounded-xl bg-blue-600 px-6 py-3 text-sm font-semibold text-white shadow-md shadow-blue-600/20 transition-all hover:-translate-y-0.5 hover:bg-blue-700"
+                        >
+                            <Plus size={18} />
+                            Create Event
+                        </Link>) : ""
+                    }
 
                 </section>
 
@@ -112,8 +119,8 @@ const UpcomingEventsContent = ({
                                 type="button"
                                 onClick={() => setActiveCategory(category)}
                                 className={`rounded-full border px-4 py-2 text-xs font-semibold transition-all duration-200 ${activeCategory === category
-                                        ? "border-blue-600 bg-blue-600 text-white shadow-md shadow-blue-600/20"
-                                        : "border-slate-200 bg-white text-slate-600 hover:border-blue-300 hover:bg-blue-50 hover:text-blue-700"
+                                    ? "border-blue-600 bg-blue-600 text-white shadow-md shadow-blue-600/20"
+                                    : "border-slate-200 bg-white text-slate-600 hover:border-blue-300 hover:bg-blue-50 hover:text-blue-700"
                                     }`}
                             >
                                 {category}
@@ -162,6 +169,7 @@ const UpcomingEventsContent = ({
                             <EventCard
                                 key={event._id}
                                 event={event}
+                            // user={user}
                             />
                         ))}
 

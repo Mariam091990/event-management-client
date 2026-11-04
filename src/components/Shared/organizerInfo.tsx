@@ -11,9 +11,10 @@ const { data: session } = authClient.useSession();
 
     return (
         <div>
-            <div>
+            <div className='border p-3 bg-amber-50 shadow' >
+                <h1>Organized by-</h1>
                                             <p className="text-sm font-semibold text-slate-800">
-                                                Event Organizer
+                                               {event.organizerName||user?.name}
                                             </p>
 
                                             <p className="text-sm text-slate-500">

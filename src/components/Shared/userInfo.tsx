@@ -47,7 +47,7 @@ const UserInfo = () => {
                                     <Link href="/create-events">Create Event</Link>
                                 </li>
                                 <li>
-                                    <Link href="/upcoming-events">Manage Events</Link>
+                                    <Link href="/manageEvent">Manage Events</Link>
                                 </li>
                                 <li>
                                     <Link href="/joined">Joined Events</Link>

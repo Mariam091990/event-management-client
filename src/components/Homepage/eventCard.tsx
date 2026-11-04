@@ -14,6 +14,8 @@ import {
     CardTitle,
 } from "@/components/ui/card";
 
+import OrganizerInfo from "../Shared/organizerInfo";
+
 interface IEvent {
     _id: string;
     title: string;
@@ -24,13 +26,25 @@ interface IEvent {
     eventDate: string;
     featured?: boolean;
     organizerEmail?: string | null;
+    organizerName?:string|null
 }
+// interface IUser {
+//     name: string;
+//     email: string,
+// }
 
 interface EventCardProps {
     event: IEvent;
+    // user: IUser
 }
 
-const EventCard = ({ event }: EventCardProps) => {
+
+
+const EventCard = ({ event}: EventCardProps) => {
+// const { data: session } = authClient.useSession();
+    
+//         const user = session?.user;
+
     const [interested, setInterested] = useState(false);
     const [rating, setRating] = useState(0);
 
@@ -55,7 +69,7 @@ const EventCard = ({ event }: EventCardProps) => {
         "Community Support": "bg-violet-100 text-violet-700",
         "Health Camp": "bg-blue-100 text-blue-700",
         "Education": "bg-green-100 text-green-700",
-        "Winter Relief":"bg-red-100 text-red-700",
+        "Winter Relief": "bg-red-100 text-red-700",
         Other: "bg-amber-100 text-amber-800",
     };
 
@@ -95,8 +109,8 @@ const EventCard = ({ event }: EventCardProps) => {
                     onClick={() => setInterested(!interested)}
                     aria-label={interested ? "Remove interest" : "Show interest"}
                     className={`absolute right-4 top-4 flex h-10 w-10 items-center justify-center rounded-full shadow-md transition-all ${interested
-                            ? "bg-rose-500 text-white"
-                            : "bg-white/95 text-rose-500 hover:bg-rose-50"
+                        ? "bg-rose-500 text-white"
+                        : "bg-white/95 text-rose-500 hover:bg-rose-50"
                         }`}
                 >
                     {interested ? "❤️" : "🤍"}
@@ -105,22 +119,25 @@ const EventCard = ({ event }: EventCardProps) => {
             </div>
 
             {/* Event Information */}
-            <CardHeader className="gap-2 px-5 pt-5">
+            <CardHeader className="gap-2 px-5 pt-5 flex justify-around">
+                <div className="">
+                    <div className="flex items-center gap-2 text-sm text-stone-500">
+                        <span>📅</span>
+                        <span>{formatDate(event.eventDate)}</span>
+                    </div>
 
-                <div className="flex items-center gap-2 text-sm text-stone-500">
-                    <span>📅</span>
-                    <span>{formatDate(event.eventDate)}</span>
+                    <CardTitle className="line-clamp-1 text-xl font-bold text-stone-800 transition-colors group-hover:text-sky-700">
+                        {event.title}
+                    </CardTitle>
+
+                    <CardDescription className="flex items-center gap-2 text-sm text-stone-500">
+                        <span>📍</span>
+                        <span className="line-clamp-1">{event.location}</span>
+                    </CardDescription>
                 </div>
-
-                <CardTitle className="line-clamp-1 text-xl font-bold text-stone-800 transition-colors group-hover:text-sky-700">
-                    {event.title}
-                </CardTitle>
-
-                <CardDescription className="flex items-center gap-2 text-sm text-stone-500">
-                    <span>📍</span>
-                    <span className="line-clamp-1">{event.location}</span>
-                </CardDescription>
-
+               
+                
+                <OrganizerInfo event={event}/>
             </CardHeader>
 
             {/* Description */}
@@ -145,8 +162,8 @@ const EventCard = ({ event }: EventCardProps) => {
                                 onClick={() => setRating(star)}
                                 aria-label={`Rate ${star} stars`}
                                 className={`text-xl transition-transform hover:scale-125 ${star <= rating
-                                        ? "text-amber-400"
-                                        : "text-stone-300"
+                                    ? "text-amber-400"
+                                    : "text-stone-300"
                                     }`}
                             >
                                 ★
@@ -170,8 +187,8 @@ const EventCard = ({ event }: EventCardProps) => {
                     type="button"
                     onClick={() => setInterested(!interested)}
                     className={`rounded-full px-4 py-2 text-sm font-semibold transition-all ${interested
-                            ? "bg-rose-100 text-rose-700"
-                            : "bg-white text-stone-600 ring-1 ring-stone-200 hover:bg-rose-50 hover:text-rose-600"
+                        ? "bg-rose-100 text-rose-700"
+                        : "bg-white text-stone-600 ring-1 ring-stone-200 hover:bg-rose-50 hover:text-rose-600"
                         }`}
                 >
                     {interested ? "❤️ Interested" : "🤍 I'm Interested"}

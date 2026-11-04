@@ -28,6 +28,7 @@ interface IEvent {
     location: string;
     eventDate: string;
     organizerEmail?: string | null;
+     organizerName?:string|null;
     featured?: boolean;
 }
 interface PageProps {
