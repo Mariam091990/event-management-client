@@ -50,7 +50,10 @@ const UserInfo = () => {
                                     <Link href="/manageEvent">Manage Events</Link>
                                 </li>
                                 <li>
-                                    <Link href="/joined">Joined Events</Link>
+                                    <Link href="/joinedByAll">Joined Events</Link>
+                                </li>
+                                <li>
+                                    <Link className="text-xs" href="/joined">Your Joined Events</Link>
                                 </li>
                             </ul>
                         </details>
