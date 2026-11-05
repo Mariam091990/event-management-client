@@ -56,7 +56,8 @@ const UpcomingEventsContent = ({
 
     // Filter events by category and search text
     const filteredEvents = useMemo(() => {
-        return events.filter((event) => {
+    return events
+        .filter((event) => {
             const matchesCategory =
                 activeCategory === "All" ||
                 event.eventType.toLowerCase() === activeCategory.toLowerCase();
@@ -66,8 +67,13 @@ const UpcomingEventsContent = ({
                 event.location.toLowerCase().includes(searchTerm.toLowerCase());
 
             return matchesCategory && matchesSearch;
-        });
-    }, [events, activeCategory, searchTerm]);
+        })
+        .sort(
+            (a, b) =>
+                new Date(a.eventDate).getTime() -
+                new Date(b.eventDate).getTime()
+        );
+}, [events, activeCategory, searchTerm]);
 
     return (
         <main id="" className="min-h-screen bg-slate-50 px-4 py-12 md:px-8">

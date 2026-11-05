@@ -18,6 +18,8 @@ import DeleteEventPage from "@/components/deleteEvent";
 import JoinedEventPage from "@/components/joinedEvent";
 
 import OrganizerInfo from "@/components/Shared/organizerInfo";
+import { auth } from "@/lib/auth";
+import { headers } from "next/headers";
 
 interface IEvent {
     _id: string;
@@ -28,7 +30,7 @@ interface IEvent {
     location: string;
     eventDate: string;
     organizerEmail?: string | null;
-     organizerName?:string|null;
+    organizerName?: string | null;
     featured?: boolean;
 }
 interface PageProps {
@@ -38,18 +40,23 @@ interface PageProps {
 const EventDetailsContent = async ({
     params,
 }: PageProps) => {
-    // const { data: session } = authClient.useSession();
-
-    //     const user = session?.user;
-
     const { eventId } = await params;
-    console.log(eventId);
+    // console.log(eventId);
+
+    const jwtToken = await auth.api.getToken({
+
+        headers: await headers(),
+    })
+    console.log("token from jwt", jwtToken);
+    const token = jwtToken?.token
 
     let event: IEvent;
     try {
-        const response = await fetch(`http://localhost:5000/events/${eventId}`,
+        const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/events/${eventId}`,
             {
-                cache: "no-store",
+                headers: {
+                    authorization: `Bearer ${token}`
+                },
             }
         );
 
@@ -180,7 +187,7 @@ const EventDetailsContent = async ({
                                         </div>
 
                                         <OrganizerInfo event={event} />
-                                        
+
                                     </div>
 
                                 </div>

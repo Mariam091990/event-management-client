@@ -23,7 +23,7 @@ const UserInfo = () => {
             {
                 user ? <div className=" flex items-center gap-2">
 
-                    <div className="tooltip tooltip-open tooltip-left " data-tip={user?.name} >
+                    <div className="tooltip tooltip-open tooltip-up " data-tip={user?.name} >
                         <Link href="/profile">
                             <div className="avatar">
                                 <div className="mask mask-circle w-15 p-1.5">
@@ -42,7 +42,7 @@ const UserInfo = () => {
                                 ⬇️
                             </summary>
 
-                            <ul className="menu dropdown-content bg-stale-200 rounded-box z-50 mt-2 w-40 p-2 shadow-lg border border-gray-200">
+                            <ul className="menu dropdown-content bg-stale-100 rounded-box z-50 mt-2 w-40 p-2 shadow-lg border border-gray-500">
                                 <li>
                                     <Link href="/create-events">Create Event</Link>
                                 </li>
@@ -57,7 +57,7 @@ const UserInfo = () => {
                     </div>
 
                     <button onClick={handleSignOut}
-                        className="rounded-md bg-red-600 px-3 py-1.5 text-sm text-white hover:bg-red-700"
+                        className="rounded-md bg-red-600 px-1 py-1 text-sm text-white hover:bg-red-700"
                     >
                         Sign Out
                     </button>

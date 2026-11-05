@@ -49,8 +49,9 @@ const DoneNUpcomingEventsContent = ({
     const [searchTerm, setSearchTerm] = useState("");
 
     // Filter events by category and search text
-    const filteredEvents = useMemo(() => {
-        return events.filter((event) => {
+ const filteredEvents = useMemo(() => {
+    return events
+        .filter((event) => {
             const matchesCategory =
                 activeCategory === "All" ||
                 event.eventType.toLowerCase() === activeCategory.toLowerCase();
@@ -60,11 +61,16 @@ const DoneNUpcomingEventsContent = ({
                 event.location.toLowerCase().includes(searchTerm.toLowerCase());
 
             return matchesCategory && matchesSearch;
-        });
-    }, [events, activeCategory, searchTerm]);
+        })
+        .sort(
+            (a, b) =>
+                new Date(a.eventDate).getTime() -
+                new Date(b.eventDate).getTime()
+        );
+}, [events, activeCategory, searchTerm]);
 
     return (
-        <main id ="allEvents" className="min-h-screen bg-slate-50 px-4 py-12 md:px-8">
+        <main  className="min-h-screen bg-slate-50 px-4 py-12 md:px-8">
 
             <div className="mx-auto max-w-7xl">
 
@@ -77,9 +83,9 @@ const DoneNUpcomingEventsContent = ({
                             Community Drives
                         </span>
 
-                        {/* <h1 className="mt-3 text-3xl font-extrabold tracking-tight text-slate-900 md:text-4xl">
-                            Upcoming Events
-                        </h1> */}
+                        <h1 className="mt-3 text-3xl font-extrabold tracking-tight text-slate-700 md:text-4xl">
+                           Recent <span className="text-sm">and</span>  Upcoming Events
+                        </h1>
 
                         <p className="mt-3 max-w-xl text-sm leading-6 text-slate-500">
                             Discover verified volunteer initiatives scheduled for

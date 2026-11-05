@@ -23,11 +23,11 @@ const ProfilePage = () => {
         });
 
         if (error) {
-            toast.error("আপডেট করা যায়নি");
+            toast.error("Update is not done!!");
             return;
         }
 
-        toast.success("প্রোফাইল আপডেট হয়েছে");
+        toast.success("Profile updated successfully");
 
     };
 
@@ -39,7 +39,7 @@ const ProfilePage = () => {
     if (isPending) {
         return (
             <div className="flex min-h-screen items-center justify-center bg-[#f0f5f0]">
-                প্রোফাইল লোড হচ্ছে...
+                Your Profile is Loading...
             </div>
         );
     }
@@ -47,7 +47,7 @@ const ProfilePage = () => {
     if (!user) {
         return (
             <div className="flex min-h-screen items-center justify-center bg-[#f0f5f0]">
-                <p>প্রোফাইল দেখতে সাইন ইন করুন।</p>
+                <p>To see your profile Sign in first</p>
             </div>
         );
     }
@@ -56,10 +56,8 @@ const ProfilePage = () => {
         <main className="min-h-screen bg-[#f0f5f0] px-4 py-12 text-[#253129]">
             <div className="mx-auto max-w-139">
                 <header className="mb-5">
-                    <h1 className="text-xl font-bold">আমার প্রোফাইল</h1>
-                    <p className="mt-1 text-xs text-[#778078]">
-                        আপনার অ্যাকাউন্টের তথ্য এখানে দেখুন
-                    </p>
+                    <h1 className="text-xl font-bold">Your Profile</h1>
+                    
                 </header>
 
                 {/* User information card */}
@@ -81,7 +79,7 @@ const ProfilePage = () => {
 
                     <div className="min-w-0 flex-1">
                         <h2 className="truncate text-sm font-semibold sm:text-base">
-                            {user.name || "ব্যবহারকারী"}
+                            {user.name || "user"}
                         </h2>
                         <p className="mt-1 truncate text-xs text-[#707970] sm:text-sm">
                             {user.email}
@@ -92,20 +90,20 @@ const ProfilePage = () => {
                         onClick={handleSignOut}
                         className="shrink-0 rounded-md border border-red-400 px-2 py-2 text-[10px] text-red-600 transition hover:bg-red-50 sm:px-3 sm:text-xs"
                     >
-                        ↪ সাইন আউট
+                        ↪ Sign out
                     </button>
                 </section>
 
                 {/* Edit profile card */}
                 <section className="mt-4.5 rounded-xl border border-[#e1e9e1] bg-[#fbfdfb] p-4 sm:p-3.75">
-                    <h2 className="text-sm font-semibold">তথ্য</h2>
+                    <h2 className="text-sm font-semibold">Information</h2>
 
                     <form onSubmit={handleUpdate} className="mt-7 px-0 sm:px-4.5 flex flex-col gap-3">
                         <label
                             htmlFor="name"
                             className="mb-1 block text-xs"
                         >
-                            নাম
+                           Name
                         </label>
 
                         <input
@@ -113,7 +111,7 @@ const ProfilePage = () => {
                             type="text"
                             name="name"
 
-                            placeholder={user.name || "আপনার নাম লিখুন"}
+                            placeholder={user.name || "Your name"}
                             className="h-7.75 w-full rounded-lg border border-[#e0e8e0] bg-transparent px-3 text-sm outline-none transition focus:border-green-600"
                         />
 
@@ -121,7 +119,7 @@ const ProfilePage = () => {
                             type="submit"
                             className="mt-3 h-8 w-full rounded-md bg-[#07883e] text-xs font-medium text-white shadow-[0_2px_3px_#0003] transition hover:bg-[#067334]"
                         >
-                            আপডেট
+                           Update
                         </button>
                     </form>
                 </section>

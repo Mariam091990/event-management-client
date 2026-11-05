@@ -24,7 +24,7 @@ const ManageEventsContent = async () => {
 
     // 3. Fetch events managed by this user
     const res = await fetch(
-        `http://localhost:5000/events/organizer/${encodeURIComponent(user.email)}`,
+        `${process.env.NEXT_PUBLIC_API_URL}/events/organizer/${encodeURIComponent(user.email)}`,
         {
             cache: "no-store",
         }

@@ -7,10 +7,12 @@ import { cacheLife } from "next/cache"
 
 
 const UpcommingEventsPage = async () => {
-    "use cache";
+    // "use cache";
 
-    cacheLife("hours");
-    const response = await fetch("http://localhost:5000/events");
+    // cacheLife("hours");
+    const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/events`,{
+        cache: "no-store",
+    });
     const data = await response.json();
 
     return (

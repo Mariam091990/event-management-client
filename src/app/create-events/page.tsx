@@ -4,6 +4,7 @@
 import { useState, type ChangeEvent } from "react";
 import { useRouter } from "next/navigation";
 import { authClient } from "@/lib/auth-client";
+import toast from "react-hot-toast";
 // import { authClient } from "@/lib/auth-client";
 
 const eventTypes = [
@@ -78,11 +79,11 @@ export default function CreateEventPage() {
         e.preventDefault();
         setError("");
 
-        // Check whether user is logged in
-        // if (!user) {
-        //     alert("Please login first!");
-        //     return;
-        // }
+        const { data } = await authClient.token();
+
+        console.log(data);
+        const token = data?.token
+        
 
         if (formData.eventDate <= getTomorrowDate()) {
             setError("Please select a future date.");
@@ -99,10 +100,12 @@ export default function CreateEventPage() {
                 organizerEmail: user?.email || "",
             };
 
-            const response = await fetch("http://localhost:5000/events", {
+            const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/events`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
+
+                    authorization: `Bearer ${token}`
                 },
                 body: JSON.stringify(eventData),
             });
@@ -111,7 +114,7 @@ export default function CreateEventPage() {
                 throw new Error("Failed to create event.");
             }
 
-            alert("Event created successfully!");
+            toast.success("Event created successfully!");
 
             router.push("/upcoming-events");
             router.refresh();

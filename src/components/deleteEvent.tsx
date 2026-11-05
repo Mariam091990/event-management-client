@@ -1,61 +1,3 @@
-// "use client"
-// import { redirect, useRouter } from "next/navigation";
-// import { IEvent } from './updateEvent';
-
-// import { Trash2 } from "lucide-react";
-// import { Button } from '@base-ui/react';
-
-
-
-// const DeleteEventPage = ({ event }: { event: IEvent }) => {
-//     console.log(event);
-
-//     const router = useRouter();
-
-//     const handleDelevent = async (id: string) => {
-
-//         const res = await fetch(`http://localhost:5000/events/${id}`, {
-//             method: 'DELETE',
-//             headers: {
-//                 'content-type': 'application/json'
-//             },
-
-
-
-//         })
-
-//         const afterDel = await res.json();
-//         console.log("After Delete", afterDel);
-
-//         if (res.ok && afterDel.deletedCount === 1) {
-//             //    this does not work for client this is for server components.
-//             // revalidatePath('/users');
-//             alert("User deleted successfully!");
-//             router.refresh();
-//             redirect("/upcoming-events");
-
-
-//         }
-
-
-//     }
-
-//     return (
-//         <div>
-//             <Button onClick={() => handleDelevent(event._id)}
-
-
-//                 className="inline-flex items-center gap-2 rounded-xl bg-rose-100 px-5 py-2.5 text-sm font-semibold text-rose-600 opacity-70"
-//             >
-//                 <Trash2 size={16} />
-//                 Delete Event
-//             </Button>
-//         </div>
-//     );
-// };
-
-// export default DeleteEventPage;
-
 
 "use client";
 
@@ -65,6 +7,7 @@ import { IEvent } from "./updateEvent";
 import { Trash2 } from "lucide-react";
 import { Button } from "@base-ui/react";
 import { authClient } from "@/lib/auth-client";
+import toast from "react-hot-toast";
 
 const DeleteEventPage = ({ event }: { event: IEvent }) => {
     const router = useRouter();
@@ -82,7 +25,7 @@ const DeleteEventPage = ({ event }: { event: IEvent }) => {
 
         // Prevent non-owners from deleting
         if (!isOwner) {
-            alert("You are not authorized to delete this event.");
+            toast.dismiss("You are not authorized to delete this event.");
             return;
         }
 
@@ -99,7 +42,7 @@ const DeleteEventPage = ({ event }: { event: IEvent }) => {
             setLoading(true);
 
             const res = await fetch(
-                `http://localhost:5000/events/${id}`,
+                `${process.env.NEXT_PUBLIC_API_URL}/events/${id}`,
                 {
                     method: "DELETE",
                     headers: {
@@ -119,18 +62,18 @@ const DeleteEventPage = ({ event }: { event: IEvent }) => {
             }
 
             if (afterDel.deletedCount === 1) {
-                alert("Event deleted successfully!");
+            toast.remove("Event deleted successfully!");
 
                 router.push("/upcoming-events");
                 router.refresh();
             } else {
-                alert("Event was not deleted.");
+                toast.dismiss("Event was not deleted.");
             }
 
         } catch (error) {
             console.error("Delete error:", error);
 
-            alert(
+            toast.dismiss(
                 error instanceof Error
                     ? error.message
                     : "Something went wrong."

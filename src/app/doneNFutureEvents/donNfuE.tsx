@@ -1,13 +1,16 @@
 import DoneNUpcomingEventsContent from '@/components/Homepage/doneNupcomingEvents';
-import { cacheLife } from 'next/cache';
+// import { cacheLife } from 'next/cache';
 
 
 const DonNfuE = async() => {
 
- "use cache";
+//  "use cache";
 
-    cacheLife("hours");
-    const response = await fetch("http://localhost:5000/allEvents");
+//     cacheLife("hours");
+
+    const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/limit-events`,{
+        cache:"no-store",
+    });
     const events = await response.json();
 
     return (
