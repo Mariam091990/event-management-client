@@ -15,7 +15,7 @@ const Footer = () => {
         <footer className="mt-20 bg-[#073b32] text-white">
 
             {/* Main Footer */}
-            <div className="mx-auto max-w-7xl px-6 py-14 lg:px-10">
+            <div className="mx-auto max-w-xl px-6 py-5 lg:px-10">
 
                 <div className="grid gap-12 sm:grid-cols-2 lg:grid-cols-4">
 

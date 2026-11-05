@@ -89,18 +89,7 @@ const DonenFutureEventCard = ({ event }: EventCardProps) => {
                     {event.eventType}
                 </span>
 
-                {/* Interested Icon */}
-                {/* <button
-                    type="button"
-                    onClick={() => setInterested(!interested)}
-                    aria-label={interested ? "Remove interest" : "Show interest"}
-                    className={`absolute right-4 top-4 flex h-10 w-10 items-center justify-center rounded-full shadow-md transition-all ${interested
-                            ? "bg-rose-500 text-white"
-                            : "bg-white/95 text-rose-500 hover:bg-rose-50"
-                        }`}
-                >
-                    {interested ? "❤️" : "🤍"}
-                </button> */}
+            
 
             </div>
 

@@ -15,7 +15,7 @@ export default function DoneNFutureEvents() {
                 </main>
             }
         >
-            {/* <UpcommingEventsPage/> */}
+       
             <DonNfuE/>
         </Suspense>
     );

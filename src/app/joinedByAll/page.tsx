@@ -28,6 +28,13 @@ const JoinedByManny = async () => {
     });
     const events: IEvent[] = await response.json();
 
+// Ascending order: earliest event date first
+    const sortedEvents = [...events].sort(
+        (a, b) =>
+            new Date(a.eventDate).getTime() -
+            new Date(b.eventDate).getTime()
+    );
+
     return (
 
         <div className=" mt-10 mb-10 text-center">
@@ -43,7 +50,7 @@ const JoinedByManny = async () => {
 
 
             <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3  min-w-3/5 container mx-auto">
-                {events.map((event) => (
+                {sortedEvents.map((event) => (
                     <JoinedByMannyCard key={event._id} event={event} />
                 ))}
             </div>

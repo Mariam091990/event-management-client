@@ -7,7 +7,7 @@ import { Search, Plus, CalendarDays } from "lucide-react";
 
 // import  EventCard from "@/components/Homepage/eventCard";
 import DonenFutureEventCard from "./doneNfutureEC";
- import { authClient } from "@/lib/auth-client";
+import { authClient } from "@/lib/auth-client";
 
 interface IEvent {
     _id: string;
@@ -49,28 +49,28 @@ const DoneNUpcomingEventsContent = ({
     const [searchTerm, setSearchTerm] = useState("");
 
     // Filter events by category and search text
- const filteredEvents = useMemo(() => {
-    return events
-        .filter((event) => {
-            const matchesCategory =
-                activeCategory === "All" ||
-                event.eventType.toLowerCase() === activeCategory.toLowerCase();
+    const filteredEvents = useMemo(() => {
+        return events
+            .filter((event) => {
+                const matchesCategory =
+                    activeCategory === "All" ||
+                    event.eventType.toLowerCase() === activeCategory.toLowerCase();
 
-            const matchesSearch =
-                event.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                event.location.toLowerCase().includes(searchTerm.toLowerCase());
+                const matchesSearch =
+                    event.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                    event.location.toLowerCase().includes(searchTerm.toLowerCase());
 
-            return matchesCategory && matchesSearch;
-        })
-        .sort(
-            (a, b) =>
-                new Date(a.eventDate).getTime() -
-                new Date(b.eventDate).getTime()
-        );
-}, [events, activeCategory, searchTerm]);
+                return matchesCategory && matchesSearch;
+            })
+            .sort(
+                (a, b) =>
+                    new Date(a.eventDate).getTime() -
+                    new Date(b.eventDate).getTime()
+            );
+    }, [events, activeCategory, searchTerm]);
 
     return (
-        <main  className="min-h-screen bg-slate-50 px-4 py-12 md:px-8">
+        <main className="min-h-screen bg-slate-50 px-4 py-12 md:px-8">
 
             <div className="mx-auto max-w-7xl">
 
@@ -84,7 +84,7 @@ const DoneNUpcomingEventsContent = ({
                         </span>
 
                         <h1 className="mt-3 text-3xl font-extrabold tracking-tight text-slate-700 md:text-4xl">
-                           Recent <span className="text-sm">and</span>  Upcoming Events
+                            Recent <span className="text-sm">and</span>  Upcoming Events
                         </h1>
 
                         <p className="mt-3 max-w-xl text-sm leading-6 text-slate-500">
@@ -95,15 +95,15 @@ const DoneNUpcomingEventsContent = ({
                     </div>
 
                     {/* Create Event Button */}
-                    {   user?     
-                    (<Link
-                        href="/create-events"
-                        className="inline-flex shrink-0 items-center justify-center gap-2 rounded-xl bg-blue-600 px-6 py-3 text-sm font-semibold text-white shadow-md shadow-blue-600/20 transition-all hover:-translate-y-0.5 hover:bg-blue-700"
-                    >
-                        <Plus size={18} />
-                        Create Event
-                    </Link>): ""
-}
+                    {user ?
+                        (<Link
+                            href="/create-events"
+                            className="inline-flex shrink-0 items-center justify-center gap-2 rounded-xl bg-blue-600 px-6 py-3 text-sm font-semibold text-white shadow-md shadow-blue-600/20 transition-all hover:-translate-y-0.5 hover:bg-blue-700"
+                        >
+                            <Plus size={18} />
+                            Create Event
+                        </Link>) : ""
+                    }
 
                 </section>
 
