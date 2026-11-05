@@ -62,7 +62,7 @@ const JoinedEventPage = ({ event }: { event: IEvent }) => {
                 );
             }
 
-            toast("Joined event successfully!");
+            toast.success("Joined event successfully!");
 
             console.log("Joined event:", result);
 

@@ -18,8 +18,8 @@ import DeleteEventPage from "@/components/deleteEvent";
 import JoinedEventPage from "@/components/joinedEvent";
 
 import OrganizerInfo from "@/components/Shared/organizerInfo";
-import { auth } from "@/lib/auth";
-import { headers } from "next/headers";
+// import { auth } from "@/lib/auth";
+// import { headers } from "next/headers";
 
 interface IEvent {
     _id: string;
@@ -43,21 +43,21 @@ const EventDetailsContent = async ({
     const { eventId } = await params;
     // console.log(eventId);
 
-    const jwtToken = await auth.api.getToken({
+    // const jwtToken = await auth.api.getToken({
 
-        headers: await headers(),
-    })
-    console.log("token from jwt", jwtToken);
-    const token = jwtToken?.token
+    //     headers: await headers(),
+    // })
+    // console.log("token from jwt", jwtToken);
+    // const token = jwtToken?.token
 
     let event: IEvent;
     try {
         const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/events/${eventId}`,
-            {
-                headers: {
-                    authorization: `Bearer ${token}`
-                },
-            }
+            // {
+            //     headers: {
+            //         authorization: `Bearer ${token}`
+            //     },
+            // }
         );
 
         if (response.status === 404) {

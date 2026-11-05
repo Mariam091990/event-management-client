@@ -4,7 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 
 const Banner = () => {
-const { data: session } = authClient.useSession();
+    const { data: session } = authClient.useSession();
 
     const user = session?.user;
 
@@ -18,7 +18,7 @@ const { data: session } = authClient.useSession();
                 alt="Social Welfare Community Events"
                 fill
                 priority
-               
+
                 // sizes="(max-width: 768px) 100vw, 1200px"
                 className="object-cover"
             />
@@ -43,21 +43,21 @@ const { data: session } = authClient.useSession();
                         healthier and more caring community.
                     </p>
 
-           <Link href="/# allEvents"> 
-                  <button className="btn mt-7 rounded-full border-0 bg-emerald-700 px-8 text-white hover:bg-emerald-800">
-                        Explore Events →
-                    </button>
-                  </Link>
+                    <Link href="/upcoming-events">
+                        <button className="btn mt-7 rounded-full border-0 bg-emerald-700 px-8 text-white hover:bg-emerald-800">
+                            Explore Events →
+                        </button>
+                    </Link>
 
-      { user?  
-       ( <Link href="/create-events">        <button className=" ml-3 btn mt-7 rounded-full border-0 bg-emerald-700 px-8 text-white hover:bg-emerald-800">
-                        Create Events →
-                    </button>
-                   
-                    </Link>): ( <Link href="/signUp"> <button className=" ml-3 btn mt-7 rounded-full border-0 bg-emerald-700 px-8 text-white hover:bg-emerald-800">
-                     Register to Create Events→
-                    </button></Link>)
-}
+                    {user ?
+                        (<Link href="/create-events">        <button className=" ml-3 btn mt-7 rounded-full border-0 bg-emerald-700 px-8 text-white hover:bg-emerald-800">
+                            Create Events →
+                        </button>
+
+                        </Link>) : (<Link href="/signUp"> <button className=" ml-3 btn mt-7 rounded-full border-0 bg-emerald-700 px-8 text-white hover:bg-emerald-800">
+                            Register to Create Events→
+                        </button></Link>)
+                    }
                 </div>
 
             </div>
